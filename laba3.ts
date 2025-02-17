@@ -1,257 +1,130 @@
-enum MyDocumentType {
-    PASSPORT = "Passport",
-    DRIVERLICENSE = "Driver License",
-    IDCard = "ID Card"
-}
-
-enum BodyType {
-    SEDAN = "Sedan",
-    SUV = "SUV",
-    HATCHBACK = "Hatchback"
-}
-
-enum CarClass {
-    ECONOMY = "Economy",
-    BUSINESS = "Business",
-    PREMIUM = "Premium"
-}
-
-interface Owner {
-    lastName: string;
-    firstName: string;
-    middleName: string;
-    birthDate: Date;
-    documentType: MyDocumentType;
-    documentSeries: string;
-    documentNumber: string;
-    printDetails(): void;
-}
-
-interface Vehicle {
-    make: string;
-    model: string;
-    year: number;
-    vin: string;
-    registrationNumber: string;
-    owner: Owner;
-    printVehicleDetails(): void;
-}
-
-class OwnerImpl implements Owner {
-    private _lastName: string;
-    private _firstName: string;
-    private _middleName: string;
-    private _birthDate: Date;
-    private _documentType: MyDocumentType;
-    private _documentSeries: string;
-    private _documentNumber: string;
-
-    constructor(
-        lastName: string, firstName: string, middleName: string, birthDate: Date,
-        documentType: MyDocumentType, documentSeries: string, documentNumber: string
-    ) {
-        this._lastName = lastName;
-        this._firstName = firstName;
-        this._middleName = middleName;
-        this._birthDate = birthDate;
-        this._documentType = documentType;
-        this._documentSeries = documentSeries;
-        this._documentNumber = documentNumber;
+var Docs;
+(function (Docs) {
+    Docs["PASSPORT"] = "\u041F\u0430c\u043F\u043E\u0440\u0442";
+    Docs["POLIC"] = "\u041F\u043E\u043B\u0438\u0441";
+    Docs["STUDENCHESKY"] = "\u0421\u0442\u0443\u0434\u0435\u043D\u0447\u0435\u0441\u043A\u0438\u0439";
+})(Docs || (Docs = {}));
+class Owner {
+    constructor(surname, name, patronymic, dataOfBirth, document, serieDocumnt, numberDocument) {
+        this._surname = surname;
+        this._name = name;
+        this._dataOfBirth = dataOfBirth;
+        this._document = document;
+        this._numberDocument = numberDocument;
+        this._patronymic = patronymic;
+        this._serieDocument = serieDocumnt;
     }
-
-    get lastName(): string { return this._lastName; }
-    set lastName(value: string) { this._lastName = value; }
-
-    get firstName(): string { return this._firstName; }
-    set firstName(value: string) { this._firstName = value; }
-
-    get middleName(): string { return this._middleName; }
-    set middleName(value: string) { this._middleName = value; }
-
-    get birthDate(): Date { return this._birthDate; }
-    set birthDate(value: Date) { this._birthDate = value; }
-
-    get documentType(): MyDocumentType { return this._documentType; }
-    set documentType(value: MyDocumentType) { this._documentType = value; }
-
-    get documentSeries(): string { return this._documentSeries; }
-    set documentSeries(value: string) { this._documentSeries = value; }
-
-    get documentNumber(): string { return this._documentNumber; }
-    set documentNumber(value: string) { this._documentNumber = value; }
-
-    public printDetails(): void {
-        console.log(`Owner Details:
-        Last Name: ${this._lastName}
-        First Name: ${this._firstName}
-        Middle Name: ${this._middleName}
-        Birth Date: ${this._birthDate.toDateString()}
-        Document Type: ${this._documentType}
-        Document Series: ${this._documentSeries}
-        Document Number: ${this._documentNumber}`);
+    get surname() { return this._surname; }
+    set surname(surname) { this._surname = surname; }
+    get name() { return this._name; }
+    set name(name) { this._name = name; }
+    get patronymic() { return this._patronymic; }
+    set patronymic(patronymic) { this._patronymic = patronymic; }
+    get dataOfBirth() { return this._dataOfBirth; }
+    set dataOfBirth(dataOfBirth) { this._dataOfBirth = dataOfBirth; }
+    get document() { return this._document; }
+    set document(document) { this._document = document; }
+    get serieDocument() { return this._serieDocument; }
+    set serieDocument(serieDocument) { this._serieDocument = serieDocument; }
+    get numberDocument() { return this._numberDocument; }
+    set numberDocument(numberDocument) { this._numberDocument = numberDocument; }
+    showInfo() {
+        console.log(this._surname, this._name, this._dataOfBirth, this._document, this._numberDocument, this._serieDocument, this._patronymic);
     }
 }
-
-class VehicleImpl implements Vehicle {
-    private _make: string;
-    private _model: string;
-    private _year: number;
-    private _vin: string;
-    private _registrationNumber: string;
-    private _owner: Owner;
-
-    constructor( make: string, model: string, year: number, vin: string,registrationNumber: string, owner: Owner) {
-        this._make = make;
+class Vehicle {
+    constructor(mark, model, yearOfRelease, VIN_number, registrationNumber, owner) {
+        this._mark = mark;
         this._model = model;
-        this._year = year;
-        this._vin = vin;
+        this._yearOfRelease = yearOfRelease;
+        this._VIN_number = VIN_number;
         this._registrationNumber = registrationNumber;
         this._owner = owner;
     }
-
-    get make(): string 
-    { return this._make; }
-    set make(value: string) 
-    { this._make = value; }
-    get model(): string 
-    { return this._model; }
-    set model(value: string)
-     { this._model = value; }
-    get year(): number
-     { return this._year; }
-    set year(value: number) 
-    { this._year = value; }
-    get vin(): string 
-    { return this._vin; }
-    set vin(value: string)
-    { this._vin = value; }
-    get registrationNumber(): string
-     { return this._registrationNumber; }
-    set registrationNumber(value: string) 
-    { this._registrationNumber = value; }
-    get owner(): Owner
-     { return this._owner; }
-    set owner(value: Owner) 
-    { this._owner = value; }
-
-    public printVehicleDetails(): void {
-        console.log(`Vehicle Details:
-        Make: ${this._make}
-        Model: ${this._model}
-        Year: ${this._year}
-        VIN: ${this._vin}
-        Registration Number: ${this._registrationNumber}`);
+    get mark() { return this._mark; }
+    set mark(mark) { this._mark = mark; }
+    get model() { return this._model; }
+    set model(model) { this._model = model; }
+    get yearOfRelease() { return this._yearOfRelease; }
+    set yearOfRelease(yearOfRelease) { this._yearOfRelease = yearOfRelease; }
+    get VIN_number() { return this._VIN_number; }
+    set VIN_number(VIN_number) { this._VIN_number = VIN_number; }
+    get registrationNumber() { return this._registrationNumber; }
+    set registrationNumber(registrationNumber) { this._registrationNumber = registrationNumber; }
+    get owner() { return this._owner; }
+    set owner(owner) { this._owner = owner; }
+    showInfo() {
+        console.log(this._mark, this._model, this._VIN_number, this._owner, this._registrationNumber, this._yearOfRelease);
     }
 }
-
-interface Car extends Vehicle {
-    bodyType: BodyType;
-    carClass: CarClass;
-}
-
-class CarImpl extends VehicleImpl implements Car {
-    private _bodyType: BodyType;
-    private _carClass: CarClass;
-
-    constructor(
-        make: string, model: string, year: number, vin: string,
-        registrationNumber: string, owner: Owner, bodyType: BodyType, carClass: CarClass
-    ) {
-        super(make, model, year, vin, registrationNumber, owner);
-        this._bodyType = bodyType;
-        this._carClass = carClass;
+var CarcaseType;
+(function (CarcaseType) {
+    CarcaseType["UNIVERSAL"] = "\u0423\u043D\u0438\u0432\u0435\u0440\u0441\u0430\u043B\u044C\u043D\u044B\u0439";
+    CarcaseType["KUPE"] = "\u041A\u0443\u043F\u0435";
+    CarcaseType["SEDAN"] = "\u0421\u0435\u0434\u0430\u043D";
+    CarcaseType["Crossover"] = "\u041A\u0440\u043E\u0441\u0441\u043E\u0432\u0435\u0440";
+})(CarcaseType || (CarcaseType = {}));
+;
+var ClassCar;
+(function (ClassCar) {
+    ClassCar["A"] = "\u041C\u0438\u043D\u0438-\u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C";
+    ClassCar["B"] = "\u041C\u0430\u043B\u0435\u043D\u044C\u043A\u0438\u0439 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C";
+    ClassCar["C"] = "\u0441\u0440\u0435\u0434\u043D\u0435\u0440\u0430\u0437\u043C\u0435\u0440\u043D\u044B\u0439 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C";
+    ClassCar["D"] = "\u043F\u043E\u043B\u043D\u043E\u0440\u0430\u0437\u043C\u0435\u0440\u043D\u044B\u0439 \u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C";
+})(ClassCar || (ClassCar = {}));
+class Car extends Vehicle {
+    constructor(mark, model, yearOfRelease, VIN_number, registrationNumber, owner, carcase, classCar) {
+        super(mark, model, yearOfRelease, VIN_number, registrationNumber, owner);
+        this._carcase = carcase;
+        this._classCar = classCar;
     }
-
-    get bodyType(): BodyType { return this._bodyType; }
-    set bodyType(value: BodyType) { this._bodyType = value; }
-
-    get carClass(): CarClass { return this._carClass; }
-    set carClass(value: CarClass) { this._carClass = value; }
-
-    public printVehicleDetails(): void {
-        super.printVehicleDetails();
-        console.log(`Body Type: ${this._bodyType}
-        Car Class: ${this._carClass}`);
+    get carcase() { return this._carcase; }
+    set carcase(carcase) { this._carcase = carcase; }
+    get classCar() { return this._classCar; }
+    set classCar(classCar) { this._classCar = classCar; }
+    showInfo() {
+        console.log(this._carcase, this._classCar, this.mark, this.model, this.yearOfRelease, this.registrationNumber, this.VIN_number);
     }
-
 }
-interface Motorbike extends Vehicle {
-    frameType: string;
-    isSport: boolean;
-}
-
-class MotorbikeImpl extends VehicleImpl implements Motorbike {
-    private _frameType: string;
-    private _isSport: boolean;
-
-    constructor(
-        make: string,
-        model: string,
-        year: number,
-        vin: string,
-        registrationNumber: string,
-        owner: Owner,
-        frameType: string,
-        isSport: boolean
-    ) {
-        super(make, model, year, vin, registrationNumber, owner);
+class Motorbike extends Vehicle {
+    constructor(mark, model, yearOfRelease, VIN_number, registrationNumber, owner, forSport, frameType) {
+        super(mark, model, yearOfRelease, VIN_number, registrationNumber, owner);
+        this._forSport = forSport;
         this._frameType = frameType;
-        this._isSport = isSport;
     }
-
-    get frameType(): string {
-        return this._frameType;
-    }
-
-    set frameType(value: string) {
-        this._frameType = value;
-    }
-
-    get isSport(): boolean {
-        return this._isSport;
-    }
-
-    set isSport(value: boolean) {
-        this._isSport = value;
-    }
-
-    public printVehicleDetails(): void {
-        super.printVehicleDetails();
-        console.log(`Frame Type: ${this._frameType}
-        Is Sport: ${this._isSport ? "Yes" : "No"}`);
+    get frameType() { return this._frameType; }
+    set frameType(frameType) { this._frameType = frameType; }
+    get forSport() { return this._forSport; }
+    set forSport(forSport) { this._forSport = forSport; }
+    showInfo() {
+        console.log(this._frameType, this._forSport, this.mark, this.model, this.yearOfRelease, this.registrationNumber, this.VIN_number);
     }
 }
-
-interface VehicleStorage<T extends Vehicle> {
-    creationDate: Date;
-    vehicles: T[];
-    getAllVehicles(): T[];
-    addVehicle(vehicle: T): void;
-}
-
-class VehicleStorageImpl<T extends Vehicle> implements VehicleStorage<T> {
-    public creationDate: Date;
-    private _vehicles: T[];
-
+class VehicleStorage {
     constructor() {
-        this.creationDate = new Date();
-        this._vehicles = [];
+        this._dateCreate = new Date();
+        this._data = [];
     }
-
-    get vehicles(): T[] { return this._vehicles; }
-    
-    public getAllVehicles(): T[] {
-        return this._vehicles;
+    get dateCreate() { return this._dateCreate; }
+    get data() { return this._data; }
+    save(data) {
+        this._data.push(data);
     }
-
-    public addVehicle(vehicle: T): void {
-        this._vehicles.push(vehicle);
-    }
+    getAll() { return this._data; }
 }
-
-
-const owner = new OwnerImpl("Ksenofontov", "Vladimir", "Andreevich", new Date(1950, 1, 28),MyDocumentType.PASSPORT, "2222", "666666");
-const car = new CarImpl("BMW", "F90 M5", 2020, "123", "A123BC", owner, BodyType.SEDAN, CarClass.PREMIUM);
-const storage = new VehicleStorageImpl<Vehicle>();
-storage.addVehicle(car);
-storage.getAllVehicles().forEach(vehicle => vehicle.printVehicleDetails());
+const owner = new Owner("Ксенофонтов", "Владимир", "Андреевич", new Date(), Docs.PASSPORT, 1111111, 42422);
+const car1 = new Car("Ford", "Focus", 2009, 2444, 32131, owner, CarcaseType.KUPE, ClassCar.B);
+const car2 = new Car("Sckoda", "Octavia", 2019, 24434, 561365, owner, CarcaseType.SEDAN, ClassCar.C);
+const owner1 = new Owner("Карашов", "Сергей", "Сергеевич", new Date(), Docs.POLIC, 12312, 235145);
+const bike1 = new Motorbike("cool", "colcol", 2014, 12421, 2144, owner1, true, "маленький");
+const bike2 = new Motorbike("lave", "lamelame", 2020, 5325235, 2352, owner1, false, "большой");
+const v1 = new Vehicle("BMW", "M5", 2019, 451, 51141, owner);
+const v2 = new Vehicle("Lada", "Vesta", 2023, 5214, 114, owner1);
+const v3 = new Vehicle("Toyota", "Camry", 2018, 4112, 515511, owner1);
+const v4 = new Vehicle("Skoda", "Oktavia", 2014, 5151, 421412, owner);
+const vehicleStorage = new VehicleStorage();
+vehicleStorage.save(v1);
+vehicleStorage.save(v2);
+vehicleStorage.save(v3);
+vehicleStorage.save(v4);
+console.log(vehicleStorage.getAll());

@@ -1,126 +1,71 @@
-declare enum MyDocumentType {
-    PASSPORT = "Passport",
-    DRIVERLICENSE = "Driver License",
-    IDCard = "ID Card"
+declare var Docs: any;
+declare class Owner {
+    constructor(surname: any, name: any, patronymic: any, dataOfBirth: any, document: any, serieDocumnt: any, numberDocument: any);
+    get surname(): any;
+    set surname(surname: any);
+    get name(): any;
+    set name(name: any);
+    get patronymic(): any;
+    set patronymic(patronymic: any);
+    get dataOfBirth(): any;
+    set dataOfBirth(dataOfBirth: any);
+    get document(): any;
+    set document(document: any);
+    get serieDocument(): any;
+    set serieDocument(serieDocument: any);
+    get numberDocument(): any;
+    set numberDocument(numberDocument: any);
+    showInfo(): void;
 }
-declare enum BodyType {
-    SEDAN = "Sedan",
-    SUV = "SUV",
-    HATCHBACK = "Hatchback"
+declare class Vehicle {
+    constructor(mark: any, model: any, yearOfRelease: any, VIN_number: any, registrationNumber: any, owner: any);
+    get mark(): any;
+    set mark(mark: any);
+    get model(): any;
+    set model(model: any);
+    get yearOfRelease(): any;
+    set yearOfRelease(yearOfRelease: any);
+    get VIN_number(): any;
+    set VIN_number(VIN_number: any);
+    get registrationNumber(): any;
+    set registrationNumber(registrationNumber: any);
+    get owner(): any;
+    set owner(owner: any);
+    showInfo(): void;
 }
-declare enum CarClass {
-    ECONOMY = "Economy",
-    BUSINESS = "Business",
-    PREMIUM = "Premium"
+declare var CarcaseType: any;
+declare var ClassCar: any;
+declare class Car extends Vehicle {
+    constructor(mark: any, model: any, yearOfRelease: any, VIN_number: any, registrationNumber: any, owner: any, carcase: any, classCar: any);
+    get carcase(): any;
+    set carcase(carcase: any);
+    get classCar(): any;
+    set classCar(classCar: any);
+    showInfo(): void;
 }
-interface Owner {
-    lastName: string;
-    firstName: string;
-    middleName: string;
-    birthDate: Date;
-    documentType: MyDocumentType;
-    documentSeries: string;
-    documentNumber: string;
-    printDetails(): void;
+declare class Motorbike extends Vehicle {
+    constructor(mark: any, model: any, yearOfRelease: any, VIN_number: any, registrationNumber: any, owner: any, forSport: any, frameType: any);
+    get frameType(): any;
+    set frameType(frameType: any);
+    get forSport(): any;
+    set forSport(forSport: any);
+    showInfo(): void;
 }
-interface Vehicle {
-    make: string;
-    model: string;
-    year: number;
-    vin: string;
-    registrationNumber: string;
-    owner: Owner;
-    printVehicleDetails(): void;
-}
-declare class OwnerImpl implements Owner {
-    private _lastName;
-    private _firstName;
-    private _middleName;
-    private _birthDate;
-    private _documentType;
-    private _documentSeries;
-    private _documentNumber;
-    constructor(lastName: string, firstName: string, middleName: string, birthDate: Date, documentType: MyDocumentType, documentSeries: string, documentNumber: string);
-    get lastName(): string;
-    set lastName(value: string);
-    get firstName(): string;
-    set firstName(value: string);
-    get middleName(): string;
-    set middleName(value: string);
-    get birthDate(): Date;
-    set birthDate(value: Date);
-    get documentType(): MyDocumentType;
-    set documentType(value: MyDocumentType);
-    get documentSeries(): string;
-    set documentSeries(value: string);
-    get documentNumber(): string;
-    set documentNumber(value: string);
-    printDetails(): void;
-}
-declare class VehicleImpl implements Vehicle {
-    private _make;
-    private _model;
-    private _year;
-    private _vin;
-    private _registrationNumber;
-    private _owner;
-    constructor(make: string, model: string, year: number, vin: string, registrationNumber: string, owner: Owner);
-    get make(): string;
-    set make(value: string);
-    get model(): string;
-    set model(value: string);
-    get year(): number;
-    set year(value: number);
-    get vin(): string;
-    set vin(value: string);
-    get registrationNumber(): string;
-    set registrationNumber(value: string);
-    get owner(): Owner;
-    set owner(value: Owner);
-    printVehicleDetails(): void;
-}
-interface Car extends Vehicle {
-    bodyType: BodyType;
-    carClass: CarClass;
-}
-declare class CarImpl extends VehicleImpl implements Car {
-    private _bodyType;
-    private _carClass;
-    constructor(make: string, model: string, year: number, vin: string, registrationNumber: string, owner: Owner, bodyType: BodyType, carClass: CarClass);
-    get bodyType(): BodyType;
-    set bodyType(value: BodyType);
-    get carClass(): CarClass;
-    set carClass(value: CarClass);
-    printVehicleDetails(): void;
-}
-interface Motorbike extends Vehicle {
-    frameType: string;
-    isSport: boolean;
-}
-declare class MotorbikeImpl extends VehicleImpl implements Motorbike {
-    private _frameType;
-    private _isSport;
-    constructor(make: string, model: string, year: number, vin: string, registrationNumber: string, owner: Owner, frameType: string, isSport: boolean);
-    get frameType(): string;
-    set frameType(value: string);
-    get isSport(): boolean;
-    set isSport(value: boolean);
-    printVehicleDetails(): void;
-}
-interface VehicleStorage<T extends Vehicle> {
-    creationDate: Date;
-    vehicles: T[];
-    getAllVehicles(): T[];
-    addVehicle(vehicle: T): void;
-}
-declare class VehicleStorageImpl<T extends Vehicle> implements VehicleStorage<T> {
-    creationDate: Date;
-    private _vehicles;
+declare class VehicleStorage {
     constructor();
-    get vehicles(): T[];
-    getAllVehicles(): T[];
-    addVehicle(vehicle: T): void;
+    get dateCreate(): any;
+    get data(): any;
+    save(data: any): void;
+    getAll(): any;
 }
-declare const owner: OwnerImpl;
-declare const car: CarImpl;
-declare const storage: VehicleStorageImpl<Vehicle>;
+declare const owner: Owner;
+declare const car1: Car;
+declare const car2: Car;
+declare const owner1: Owner;
+declare const bike1: Motorbike;
+declare const bike2: Motorbike;
+declare const v1: Vehicle;
+declare const v2: Vehicle;
+declare const v3: Vehicle;
+declare const v4: Vehicle;
+declare const vehicleStorage: VehicleStorage;
